@@ -1,1 +1,4 @@
-# jsForm
+- "npm start" to start server
+- http://localhost:3000
+- form submissions written to static/submissions.json
+- users registration in static/users.json

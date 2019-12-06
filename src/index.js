@@ -24,29 +24,30 @@ server.put('/add', function (request, response) {
 
 /* Routes */
 // Submit form
-server.put('/submit', function (request, response) {
-  fs.appendFile('static/submissions.json', 'new entry', function (err) {
+server.post('/submit', function (request, response) {
+  fs.appendFile('db/submissions.json', 'new entry', function (err) {
     if (err) throw err;
     response.send('Form submitted!');
   });
 });
 
 // Create a user
-server.put('/register', function (request, response) {
-  fs.appendFile('./static/users.json', 'new user', function (err) {
+server.post('/register', function (request, response) {
+  fs.appendFile('./db/users.json', 'new user', function (err) {
     if (err) throw err;
     response.send('Registration complete!');
   });
 });
 
 // Log in a user (create session)
-//
+//server.post('/login', function (request, response) {
 // *** code here ***
+//});
 //
 
 // Get a list of all submissions
 server.get('/submissions', function (request, response) {
-  fs.readFile('static/submissions.json', (err, data) => {
+  fs.readFile('db/submissions.json', (err, data) => {
     if (err) throw err;
     response.send('A very long list of submissions!');
     console.log(data); // How to encode data and return it in readable format?

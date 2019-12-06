@@ -1,4 +1,4 @@
-' use strict';
+'use strict';
 
 /* Server initialization */
 let express = require('express');

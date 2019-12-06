@@ -15,7 +15,7 @@ server.post('/', function (request, response) {
 });
 
 // Test 3 - append to file
-server.patch('/add', function (request, response) {
+server.put('/add', function (request, response) {
   fs.appendFile('log.txt', sendText, function (err) {
     if (err) throw err;
     console.log('Saved!');
@@ -24,7 +24,7 @@ server.patch('/add', function (request, response) {
 
 /* Routes */
 // Submit form
-server.patch('/submit', function (request, response) {
+server.put('/submit', function (request, response) {
   fs.appendFile('static/submissions.json', 'new entry', function (err) {
     if (err) throw err;
     response.send('Form submitted!');
@@ -32,7 +32,7 @@ server.patch('/submit', function (request, response) {
 });
 
 // Create a user
-server.patch('/register', function (request, response) {
+server.put('/register', function (request, response) {
   fs.appendFile('./static/users.json', 'new user', function (err) {
     if (err) throw err;
     response.send('Registration complete!');

@@ -3,6 +3,7 @@
 let express = require('express');
 let server = require('./server');
 let fs = require('fs');
+let db = require('./db');
 
 let router = express.Router();
 
@@ -30,7 +31,7 @@ server.post('/login', function (request, response) {
 });
 
 // Get a list of all submissions
-server.get('/submissions', function (request, response) {
+server.get('/submissions', function (request, response, next) {
   response.send('You have a very long list of submissions!');
 });
 

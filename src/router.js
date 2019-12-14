@@ -12,6 +12,8 @@ function validateSubMiddleware(request, response, next) {
     response.status(400).send('"name" is a required field');
   } else if (!form.email) {
     response.status(400).send('"email" is a required field');
+  } else if (!form.message) {
+    response.status(400).send('"message" is a required field');
   } else {
     next();
   }

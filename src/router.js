@@ -18,7 +18,7 @@ function validateSubMiddleware(request, response, next) {
 }
 
 // Submit form
-router.post('/submit', validateSubMiddleware, async function (request, response, next) {
+router.post('/contact_us', validateSubMiddleware, async function (request, response, next) {
   await db.addSub(request.body);
   response.sendStatus(201);
   next();
@@ -35,7 +35,7 @@ router.post('/login', function (request, response) {
 });
 
 // Get a list of all submissions
-router.get('/submissions', function (request, response, next) {
+router.get('/contact_subs', function (request, response, next) {
   response.send('You have a very long list of submissions!');
 });
 

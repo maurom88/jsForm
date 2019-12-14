@@ -2,7 +2,6 @@
 
 let express = require('express'); // Import express
 let router = require('./router'); // Import router
-// let errorHandler = require('./errorHandler'); // Import error handler
 
 let app = express();
 
@@ -10,16 +9,10 @@ let app = express();
 app.use(express.json()); // Allows to read and write json files easily
 app.use(router); // Apply router as middleware
 
-// Default error handler
-// To be used with imported error handler
-// app.use(function (error, req, res, next) {
-//   errorHandler(error, res);
-// });
 app.use(function (error, request, response, next) {
   console.error(error);
   response.sendStatus(500); // "Internal Server Error"
 });
-
 
 // Server configuration
 let port = 3000;

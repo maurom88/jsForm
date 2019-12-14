@@ -45,13 +45,13 @@ async function readUsers() {
     return allUsers;
 };
 
-// Write the contents of submissions.json, replacing the entire file
+// Write the contents of users.json, replacing the entire file
 async function writeUsers(dbItems) {
     let json = JSON.stringify(dbItems, null, 2);
     await writeFile(dbUsersPath, json);
 }
 
-// Write submissions
+// Write users
 async function addUser(newSub) {
     // Step One: read db content
     let allUsers = await readUsers();

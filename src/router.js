@@ -16,33 +16,22 @@ let router = express.Router();
 
 // Submit form
 server.post('/submit', function (request, response) {
-  fs.appendFile('db/submissions.json', 'new entry', function (err) {
-    if (err) throw err;
-    response.send('Form submitted!');
-  });
+  response.send('Form submitted!');
 });
 
 // Create a user
 server.post('/register', function (request, response) {
-  fs.appendFile('./db/users.json', 'new user', function (err) {
-    if (err) throw err;
-    response.send('Registration complete!');
-  });
+  response.send('Registration complete!');
 });
 
 // Log in a user (create session)
-//server.post('/login', function (request, response) {
-// *** code here ***
-//});
-//
+server.post('/login', function (request, response) {
+  response.send('Logged in!');
+});
 
 // Get a list of all submissions
 server.get('/submissions', function (request, response) {
-  fs.readFile('db/submissions.json', (err, data) => {
-    if (err) throw err;
-    response.send('A very long list of submissions!');
-    console.log(data); // How to encode data and return it in readable format?
-  });
+  response.send('You have a very long list of submissions!');
 });
 
 module.exports = router;

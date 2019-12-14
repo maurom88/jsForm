@@ -15,9 +15,9 @@ app.use(router); // Apply router as middleware
 // app.use(function (error, req, res, next) {
 //   errorHandler(error, res);
 // });
-app.use(function (error, req, res, next) {
+app.use(function (error, request, response, next) {
   console.error(error);
-  res.sendStatus(500); // "Internal Server Error"
+  response.sendStatus(500); // "Internal Server Error"
 });
 
 // for test purposes

@@ -16,9 +16,9 @@ app.use(router); // Apply router as middleware
 //   errorHandler(error, res);
 // });
 app.use(function (error, req, res, next) {
-  console.error(error); // We have this here so we can see any errors that happened in our console for debugging purposes
-  res.sendStatus(500); // We send a 500 status code to indicate there has been an "Internal Server Error"
+  console.error(error);
+  res.sendStatus(500); // "Internal Server Error"
 });
 
 // for test purposes
-//app.use('/src/test_routes', require('./test_routes'));
+app.use('/src/test_routes', require('./test_routes'));

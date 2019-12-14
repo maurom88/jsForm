@@ -3,8 +3,18 @@
 let express = require('express');
 let server = require('./server');
 let fs = require('fs');
+let db = require('./test_db');
 
 let router = express.Router();
+
+// *** DB TEST START *** //
+server.post('/car', async function (req, res, next) {
+  // Add car to DB and send status code
+  await db.addCar(req.body);
+  res.sendStatus(201);
+  next();
+});
+// *** DB TEST END *** //
 
 // Test 1 - http://localhost:3000
 server.get('/', function (request, response) {

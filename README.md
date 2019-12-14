@@ -2,11 +2,12 @@ A form submission api that stores data in JSON files; created as part of a cours
 
 TODO: *** phase two ***
 
-*    set up default error handling middleware   --- DONE
-*    set up JSON parsing middleware             --- DONE
+* set up default error handling middleware   --- DONE
+* set up JSON parsing middleware             --- DONE
+* 
 
 *** phase three ***
-
+* JSON.stringify for path in db.json
 *    save submissions to JSON file
 *    read submissions from JSON file
 *    user registration

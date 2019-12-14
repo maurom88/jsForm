@@ -27,8 +27,9 @@ router.post('/contact_us', validateSubMiddleware, async function (request, respo
 });
 
 // Create a user
-router.post('/register', function (request, response) {
-  response.send('Registration complete!');
+router.post('/register', async function (request, response, next) {
+  await db.addUser(request.body);
+  response.sendStatus(201);
 });
 
 // Log in a user (create session)

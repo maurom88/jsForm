@@ -17,6 +17,3 @@ app.use(function (error, request, response, next) {
 // Server configuration
 let port = 3000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
-
-// for test purposes
-//app.use('/src/test/test_routes', require('./test/test_routes'));

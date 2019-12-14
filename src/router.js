@@ -16,8 +16,10 @@ let router = express.Router();
 // 5) Overwrite whole file with new JSON
 
 // Submit form
-server.post('/submit', function (request, response) {
-  response.send('Form submitted!');
+server.post('/submit', async function (request, response, next) {
+  await db.addSub(request.body);
+  response.sendStatus(201);
+  console.log('Form submitted!');
 });
 
 // Create a user

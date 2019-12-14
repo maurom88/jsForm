@@ -1,36 +1,41 @@
 'use strict';
 
 let express = require('express');
-let server = require('./server');
-let fs = require('fs');
+let db = require('./db');
 
 let router = express.Router();
 
-/* Routes */
-// For updating files:
-// 1) Read whole file
-// 2) Parse JSON
-// 3) Add new entry to array from parsed JSON
-// 4) Stringify back into JSON
-// 5) Overwrite whole file with new JSON
+function validateSubMiddleware(request, response, next) {
+  // If we get an invalid form in `request.body` we want to respond with a 400 status code
+  let form = request.body;
+  if (!form.name) {
+    response.status(400).send('"name" is a required field');
+  } else if (!form.email) {
+    response.status(400).send('"email" is a required field');
+  } else {
+    next();
+  }
+}
 
 // Submit form
-server.post('/submit', function (request, response) {
-  response.send('Form submitted!');
+router.post('/submit', validateSubMiddleware, async function (request, response, next) {
+  await db.addSub(request.body);
+  response.sendStatus(201);
+  next();
 });
 
 // Create a user
-server.post('/register', function (request, response) {
+router.post('/register', function (request, response) {
   response.send('Registration complete!');
 });
 
 // Log in a user (create session)
-server.post('/login', function (request, response) {
+router.post('/login', function (request, response) {
   response.send('Logged in!');
 });
 
 // Get a list of all submissions
-server.get('/submissions', function (request, response) {
+router.get('/submissions', function (request, response, next) {
   response.send('You have a very long list of submissions!');
 });
 

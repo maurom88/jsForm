@@ -20,5 +20,10 @@ app.use(function (error, request, response, next) {
   response.sendStatus(500); // "Internal Server Error"
 });
 
+
+// Server configuration
+let port = 3000;
+app.listen(port, () => console.log(`Server is running on port ${port}`));
+
 // for test purposes
 //app.use('/src/test/test_routes', require('./test/test_routes'));

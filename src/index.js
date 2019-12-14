@@ -21,4 +21,4 @@ app.use(function (error, request, response, next) {
 });
 
 // for test purposes
-app.use('/src/test_routes', require('./test_routes'));
+//app.use('/src/test_routes', require('./test_routes'));

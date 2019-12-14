@@ -1,7 +1,7 @@
 'use strict';
 
 let express = require('express');
-let server = require('./server');
+let server = require('../server');
 let fs = require('fs');
 let db = require('./test_db');
 

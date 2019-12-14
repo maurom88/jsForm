@@ -64,5 +64,6 @@ async function addUser(newSub) {
 
 module.exports = {
     addSub: addSub,
+    readSubs: readSubs,
     addUser: addUser,
 };

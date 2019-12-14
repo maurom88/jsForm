@@ -9,7 +9,7 @@ TODO:
 
 *** phase three ***
 * save submissions to JSON file             --- DONE
-* read submissions from JSON file  
+* read submissions from JSON file           --- DONE
 * user registration                         --- DONE
 * user login
 * (extra): templated HTML for submissions listing (read from file)

@@ -26,6 +26,14 @@ router.post('/contact_us', validateSubMiddleware, async function (request, respo
   next();
 });
 
+// Get a list of all submissions
+router.get('/contact_us', async function (request, response, next) {
+  let submissions = await db.readSubs();
+  console.log('Submissions:');
+  console.log(submissions);
+  response.sendStatus(200);
+});
+
 // Create a user
 router.post('/register', async function (request, response, next) {
   await db.addUser(request.body);
@@ -34,12 +42,7 @@ router.post('/register', async function (request, response, next) {
 
 // Log in a user (create session)
 router.post('/login', function (request, response) {
-  response.send('Logged in!');
-});
-
-// Get a list of all submissions
-router.get('/contact_subs', function (request, response, next) {
-  response.send('You have a very long list of submissions!');
+  response.sendStatus(201);
 });
 
 module.exports = router;

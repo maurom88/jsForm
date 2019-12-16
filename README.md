@@ -30,5 +30,6 @@ TODO:
 ### Template for adding users ###
 {
     "name": "mauro",
-    "password": "aaa"
+    "password": "aaa",
+    "logged": "out"
 }

@@ -9,6 +9,7 @@ let writeFile = util.promisify(fs.writeFile);
 
 let dbSubPath = path.resolve('src/db/submissions.json');
 let dbUsersPath = path.resolve('src/db/users.json');
+let sessionPath = path.resolve('src/sessions');
 
 // *** SUBMISSIONS READING AND WRITING START *** //
 // Read submissions
@@ -60,10 +61,28 @@ async function addUser(newSub) {
     // Step Three: rewrite db file with new content
     await writeUsers(allUsers);
 };
+
+// Login
+async function login(username) {
+    let userSessionPath = sessionPath + '_' + username + '.txt';
+    let logStatus = "logged in";
+    console.log("file path: ", userSessionPath);
+    console.log("logged status: ", logStatus);
+    fs.writeFile(userSessionPath, logStatus);
+};
+
+// Logout
+async function logout(username) {
+    let userSessionPath = sessionPath + '_' + username;
+    fs.unlinkSync(userSessionPath);
+};
+
 // *** USERS READING AND WRITING END *** //
 
 module.exports = {
     addSub: addSub,
     readSubs: readSubs,
     addUser: addUser,
+    login: login,
+    logout: logout,
 };

@@ -1,6 +1,7 @@
 [
   {
     "name": "mauro",
-    "password": "aaa"
+    "password": "aaa",
+    "logged": "out"
   }
 ]

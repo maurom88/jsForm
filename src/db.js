@@ -66,16 +66,16 @@ async function addUser(newSub) {
 // Login
 // A session file containing the name of the user is created
 async function login(username) {
-    let userSessionPath = sessionPath + '_' + username + '.txt';
+    let fileName = sessionPath + '//' + username + '.txt';
     let logStatus = "logged in";
-    await writeFile(userSessionPath, logStatus);
+    await writeFile(fileName, logStatus);
 };
 
 // Logout
 // A session file containing the name of the user is deleted
 async function logout(username) {
-    let userSessionPath = sessionPath + '_' + username + '.txt';
-    await deleteFile(userSessionPath);
+    let fileName = sessionPath + '//' + username + '.txt';
+    await deleteFile(fileName);
 };
 
 // *** USERS READING AND WRITING END *** //

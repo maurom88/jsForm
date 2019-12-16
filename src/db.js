@@ -6,6 +6,7 @@ let path = require('path');
 
 let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
+let deleteFile = util.promisify(fs.unlink);
 
 let dbSubPath = path.resolve('src/db/submissions.json');
 let dbUsersPath = path.resolve('src/db/users.json');
@@ -63,18 +64,18 @@ async function addUser(newSub) {
 };
 
 // Login
+// A session file containing the name of the user is created
 async function login(username) {
     let userSessionPath = sessionPath + '_' + username + '.txt';
     let logStatus = "logged in";
-    console.log("file path: ", userSessionPath);
-    console.log("logged status: ", logStatus);
-    fs.writeFile(userSessionPath, logStatus);
+    await writeFile(userSessionPath, logStatus);
 };
 
 // Logout
+// A session file containing the name of the user is deleted
 async function logout(username) {
-    let userSessionPath = sessionPath + '_' + username;
-    fs.unlinkSync(userSessionPath);
+    let userSessionPath = sessionPath + '_' + username + '.txt';
+    await deleteFile(userSessionPath);
 };
 
 // *** USERS READING AND WRITING END *** //

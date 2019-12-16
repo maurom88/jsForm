@@ -41,9 +41,19 @@ router.post('/register', async function (request, response, next) {
 });
 
 // Log in a user (create session)
-
+router.post('/login', function (request, response) {
+  let username = request.body.name;
+  console.log(typeof(username));
+  console.log('username: ', username);
+  db.login(username);
+  response.send("Logged in");
+});
 
 // Log out a user (delete session)
-
+router.delete('/logout', async function (request, response, next) {
+  let username = request.body;
+  await db.logout(username);
+  response.send("Logged out");
+});
 
 module.exports = router;

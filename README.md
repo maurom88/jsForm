@@ -31,5 +31,5 @@ TODO:
 {
     "name": "mauro",
     "password": "aaa",
-    "logged in": false
+    "logged": false
 }

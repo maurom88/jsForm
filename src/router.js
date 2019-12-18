@@ -43,7 +43,8 @@ router.post('/user/register', async function (request, response, next) {
 // Log in a user (create session)
 router.post('/user/login', async function (request, response, next) {
   let username = request.body.name;
-  await db.login(username);
+  let password = request.body.password;
+  await db.login(username, password);
   response.sendStatus(201);
   next();
 });

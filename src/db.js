@@ -65,7 +65,10 @@ async function addUser(newSub) {
 
 // Login
 // A session file containing the name of the user is created
-async function login(username) {
+async function login(username, password) {
+    
+    // add conditional check for username and password
+    
     let fileName = sessionPath + '//' + username + '.txt';
     let logStatus = "logged in";
     await writeFile(fileName, logStatus);

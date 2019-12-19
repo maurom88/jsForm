@@ -9,15 +9,21 @@ TODO:
 
 *** phase three ***
 * save submissions to JSON file             --- DONE
-* read submissions from JSON file  
+* read submissions from JSON file           --- DONE
 * user registration                         --- DONE
-* user login
+
+*** extra ***
+* user login:
+>>> create a file when user logs in         --- DONE
+>>> password check for login
+>>> delete file when user logs out          --- DONE
 * (extra): templated HTML for submissions listing (read from file)
 
     "npm start" to start server
     http://localhost:3000
-    form submissions written to static/submissions.json
-    users registration in static/users.json
+    form submissions written to src/db/submissions.json
+    user registrations in src/db/users.json
+    user sessions in src/sessions
 
 ### Template for adding submissions ###
 {

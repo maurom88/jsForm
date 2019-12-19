@@ -20,26 +20,40 @@ function validateSubMiddleware(request, response, next) {
 }
 
 // Submit form
-router.post('/contact_us', validateSubMiddleware, async function (request, response, next) {
+router.post('/contact_us/post', validateSubMiddleware, async function (request, response, next) {
   await db.addSub(request.body);
   response.sendStatus(201);
   next();
 });
 
+// Get a list of all submissions
+router.get('/contact_us/list', async function (request, response, next) {
+  let submissions = await db.readSubs();
+  console.log('Submissions:');
+  console.log(submissions);
+  response.sendStatus(200);
+});
+
 // Create a user
-router.post('/register', async function (request, response, next) {
+router.post('/user/register', async function (request, response, next) {
   await db.addUser(request.body);
   response.sendStatus(201);
 });
 
 // Log in a user (create session)
-router.post('/login', function (request, response) {
-  response.send('Logged in!');
+router.post('/user/login', async function (request, response, next) {
+  let username = request.body.name;
+  let password = request.body.password;
+  await db.login(username, password);
+  response.sendStatus(201);
+  next();
 });
 
-// Get a list of all submissions
-router.get('/contact_subs', function (request, response, next) {
-  response.send('You have a very long list of submissions!');
+// Log out a user (delete session)
+router.delete('/user/logout', async function (request, response, next) {
+  let username = request.body.name;
+  await db.logout(username);
+  response.sendStatus(200);
 });
 
 module.exports = router;

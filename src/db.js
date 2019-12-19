@@ -6,9 +6,11 @@ let path = require('path');
 
 let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
+let deleteFile = util.promisify(fs.unlink);
 
 let dbSubPath = path.resolve('src/db/submissions.json');
 let dbUsersPath = path.resolve('src/db/users.json');
+let sessionPath = path.resolve('src/sessions');
 
 // *** SUBMISSIONS READING AND WRITING START *** //
 // Read submissions
@@ -45,13 +47,13 @@ async function readUsers() {
     return allUsers;
 };
 
-// Write the contents of submissions.json, replacing the entire file
+// Write the contents of users.json, replacing the entire file
 async function writeUsers(dbItems) {
     let json = JSON.stringify(dbItems, null, 2);
     await writeFile(dbUsersPath, json);
 }
 
-// Write submissions
+// Write users
 async function addUser(newSub) {
     // Step One: read db content
     let allUsers = await readUsers();
@@ -60,9 +62,38 @@ async function addUser(newSub) {
     // Step Three: rewrite db file with new content
     await writeUsers(allUsers);
 };
+
+// Login
+// A session file containing the name of the user is created
+async function login(username, password) {
+    // *** conditional check for username and password *** //
+
+    // Step One: read db content
+    let allUsers = await readUsers();
+    // Step Two: find user in array of arrays
+    let entries = Object.entries(allUsers);
+
+    // Step Three: verify password is correct
+
+    // *** write session file *** //
+    let fileName = sessionPath + '//' + username + '.txt';
+    let logStatus = "logged in";
+    await writeFile(fileName, logStatus);
+};
+
+// Logout
+// A session file containing the name of the user is deleted
+async function logout(username) {
+    let fileName = sessionPath + '//' + username + '.txt';
+    await deleteFile(fileName);
+};
+
 // *** USERS READING AND WRITING END *** //
 
 module.exports = {
     addSub: addSub,
+    readSubs: readSubs,
     addUser: addUser,
+    login: login,
+    logout: logout,
 };

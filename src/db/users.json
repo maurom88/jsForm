@@ -2,5 +2,9 @@
   {
     "name": "mauro",
     "password": "aaa"
+  },
+  {
+    "name": "alice",
+    "password": "aaa"
   }
 ]

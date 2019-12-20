@@ -41,19 +41,8 @@ router.post('/user/register', async function (request, response, next) {
 });
 
 // Log in a user (create session)
-router.post('/user/login', async function (request, response, next) {
-  let username = request.body.name;
-  let password = request.body.password;
-  await db.login(username, password);
-  response.sendStatus(201);
-  next();
-});
 
 // Log out a user (delete session)
-router.delete('/user/logout', async function (request, response, next) {
-  let username = request.body.name;
-  await db.logout(username);
-  response.sendStatus(200);
-});
+
 
 module.exports = router;

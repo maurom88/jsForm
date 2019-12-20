@@ -63,31 +63,6 @@ async function addUser(newSub) {
     await writeUsers(allUsers);
 };
 
-// Login
-// A session file containing the name of the user is created
-async function login(username, password) {
-    // *** conditional check for username and password *** //
-
-    // Step One: read db content
-    let allUsers = await readUsers();
-    // Step Two: find user in array of arrays
-    let entries = Object.entries(allUsers);
-
-    // Step Three: verify password is correct
-
-    // *** write session file *** //
-    let fileName = sessionPath + '//' + username + '.txt';
-    let logStatus = "logged in";
-    await writeFile(fileName, logStatus);
-};
-
-// Logout
-// A session file containing the name of the user is deleted
-async function logout(username) {
-    let fileName = sessionPath + '//' + username + '.txt';
-    await deleteFile(fileName);
-};
-
 // *** USERS READING AND WRITING END *** //
 
 module.exports = {

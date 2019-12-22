@@ -13,10 +13,7 @@ TODO:
 * user registration                         --- DONE
 
 *** extra ***
-* user login:
->>> create a file when user logs in         --- DONE
->>> password check for login
->>> delete file when user logs out          --- DONE
+* user login
 * (extra): templated HTML for submissions listing (read from file)
 
     "npm start" to start server

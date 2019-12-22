@@ -19,7 +19,8 @@ TODO:
 >>> check if password is correct
 >>> log user in
 >>> logout
-* (extra): templated HTML for submissions listing (read from file)
+* (extra): templated HTML for
+    submissions listing (read from file)    --- DONE
 
     "npm start" to start server
     http://localhost:3000

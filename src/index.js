@@ -2,7 +2,7 @@
 
 let express = require('express'); // Import express
 let router = require('./router'); // Import router
-var session = require('express-session');
+var session = require('express-session'); // Import session
 
 let app = express();
 
@@ -20,17 +20,14 @@ app.use(session({
   },
 }));
 
-
-app.get('/', function (req, res) {
-  if (req.session.views) {
-    req.session.views++;
-    res.send("You visited this page " + req.session.views + " times");
-  } else {
-    req.session.views = 1;
-    res.send("Welcome to this page for the first time!");
+// If username is undefined, the session hasn't been set
+app.use(function (req, res, next) {
+  if (req.session.username === undefined) {
+    req.session.username = null;
   }
 });
 
+// Error handler
 app.use(function (error, request, response, next) {
   console.error(error);
   response.sendStatus(500); // "Internal Server Error"

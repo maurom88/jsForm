@@ -14,6 +14,11 @@ TODO:
 
 *** extra ***
 * user login
+>>> create session middleware               --- DONE
+>>> check if username exists in db
+>>> check if password is correct
+>>> log user in
+>>> logout
 * (extra): templated HTML for submissions listing (read from file)
 
     "npm start" to start server

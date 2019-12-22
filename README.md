@@ -24,9 +24,10 @@ TODO:
 
     "npm start" to start server
     http://localhost:3000
+    http://localhost:3000/contact_us/list to see list of submissions
     form submissions written to src/db/submissions.json
     user registrations in src/db/users.json
-    user sessions in src/sessions
+
 
 ### Template for adding submissions ###
 {

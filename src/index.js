@@ -1,10 +1,15 @@
 'use strict';
 
-let express = require('express'); // Import express
-let router = require('./router'); // Import router
-var session = require('express-session'); // Import session
+let express = require('express');
+let router = require('./router');
+let session = require('express-session');
+let path = require('path');
 
 let app = express();
+
+// Initialize pug template engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, '../views'));
 
 // Apply middleware
 app.use(express.json()); // Allows to read and write json files easily

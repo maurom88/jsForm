@@ -14,7 +14,7 @@ TODO:
 
 *** extra ***
 * user login
-- create session middleware               --- DONE
+- create session middleware                 --- DONE
 - check if username exists in db
 - check if password is correct
 - log user in

@@ -1,2 +1,8 @@
 h1 Submissions:
-#{submissions}
+ul
+    each submission in submissions
+        li
+            p=submission.name
+            p=submission.email
+            p=submission.message
+            p=submission.phone

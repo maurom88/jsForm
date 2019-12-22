@@ -29,10 +29,7 @@ router.post('/contact_us/post', validateSubMiddleware, async function (request, 
 // Get a list of all submissions
 router.get('/contact_us/list', async function (request, response, next) {
   let submissions = await db.readSubs();
-  //console.log('Submissions:');
-  //console.log(submissions);
-  response.render('submissions', {submissions});
-  //response.sendStatus(200);
+  response.render('submissions', {"submissions": submissions});
 });
 
 // Create a user

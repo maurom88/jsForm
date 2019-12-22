@@ -69,6 +69,4 @@ module.exports = {
     addSub: addSub,
     readSubs: readSubs,
     addUser: addUser,
-    login: login,
-    logout: logout,
 };

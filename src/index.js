@@ -30,6 +30,7 @@ app.use(function (req, res, next) {
   if (req.session.username === undefined) {
     req.session.username = null;
   }
+  next();
 });
 
 // Error handler
@@ -39,5 +40,5 @@ app.use(function (error, request, response, next) {
 });
 
 // Server configuration
-let port = 3000;
+let port = 9000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));

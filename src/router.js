@@ -2,6 +2,7 @@
 
 let express = require('express');
 let db = require('./db');
+let cors = require('cors');
 
 let router = express.Router();
 
@@ -20,7 +21,7 @@ function validateSubMiddleware(request, response, next) {
 }
 
 // Submit form
-router.post('/contact_us/post', validateSubMiddleware, async function (request, response, next) {
+router.post('/contact_us/post', cors(), validateSubMiddleware, async function (request, response, next) {
   await db.addSub(request.body);
   response.sendStatus(201);
   next();

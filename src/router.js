@@ -20,14 +20,14 @@ function validateSubMiddleware(request, response, next) {
 }
 
 // Submit form
-router.post('/contact_us/post', validateSubMiddleware, async function (request, response, next) {
+router.post('/contact/post', validateSubMiddleware, async function (request, response, next) {
   await db.addSub(request.body);
   response.sendStatus(201);
   next();
 });
 
 // Get a list of all submissions
-router.get('/contact_us/list', async function (request, response, next) {
+router.get('/contact/list', async function (request, response, next) {
   let submissions = await db.readSubs();
   response.render('submissions', {"submissions": submissions});
 });

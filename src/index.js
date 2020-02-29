@@ -4,6 +4,7 @@ let express = require('express');
 let router = require('./router');
 let session = require('express-session');
 let path = require('path');
+let cors = require('cors');
 
 let app = express();
 
@@ -12,6 +13,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
 
 // Apply middleware
+app.use(cors());
 app.use(express.json()); // Allows to read and write json files easily
 app.use(router); // Apply router as middleware
 // Session middleware

@@ -2,11 +2,8 @@
 
 let express = require('express');
 let db = require('./db');
-let cors = require('cors');
 
-let app = express();
 let router = express.Router();
-app.use(cors());
 
 function validateSubMiddleware(request, response, next) {
   // If we get an invalid form in `request.body` we want to respond with a 400 status code

@@ -28,12 +28,22 @@ async function writeSubs(dbItems) {
 
 // Write submissions
 async function addSub(newSub) {
-    // Step One: read db content
-    let allSubs = await readSubs();
-    // Step Two: add the new submission
-    allSubs.push(newSub);
-    // Step Three: rewrite db file with new content
-    await writeSubs(allSubs);
+    const name = newSub.name;
+    const email = newSub.email;
+    const phone = newSub.phone;
+    const subject = newSub.subject;
+    const message = newSub.message;
+
+    const query = `INSERT INTO formsubs (Name, Email, Phone, Subject, Message) VALUES ('` +
+        name + `', '` +
+        email + `', '` +
+        phone + `', '` +
+        subject + `', '` +
+        message + `');`;
+
+    connection.query(query, (err, result) => {
+        if (err) throw err;
+    });
 };
 
 // *** SUBMISSIONS READING AND WRITING END *** //

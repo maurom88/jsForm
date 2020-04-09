@@ -42,3 +42,9 @@ TODO:
     "name": "mauro",
     "password": "aaa"
 }
+
+### Create db user
+USE mysql;
+CREATE USER 'nodeclient'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+GRANT ALL PRIVILEGES ON *.* TO 'nodeclient'@'localhost';
+flush privileges;

@@ -58,21 +58,38 @@ function readUsers(req, res, next) {
     });
 }
 
-// Write the contents of users.json, replacing the entire file
-async function writeUsers(dbItems) {
-    let json = JSON.stringify(dbItems, null, 2);
-    await writeFile(dbUsersPath, json);
+function addUser(newUser) {
+    const firstName = newUser.firstName
+    const lastName = newUser.lastName
+    const email = newUser.email
+    const password = newUser.password
+
+    const query = `INSERT INTO users (FirstName, LastName, Email, Password) VALUES ('` +
+    firstName + `', '` +
+    lastName + `', '` +
+    email + `', '` +
+    password + `');`;
+
+    connection.query(query, (err, result) => {
+        if (err) throw err;
+    });
 }
 
-// Write users
-async function addUser(newSub) {
-    // Step One: read db content
-    let allUsers = await readUsers();
-    // Step Two: add the new submission
-    allUsers.push(newSub);
-    // Step Three: rewrite db file with new content
-    await writeUsers(allUsers);
-};
+// // Write the contents of users.json, replacing the entire file
+// async function writeUsers(dbItems) {
+//     let json = JSON.stringify(dbItems, null, 2);
+//     await writeFile(dbUsersPath, json);
+// }
+
+// // Write users
+// async function addUser(newSub) {
+//     // Step One: read db content
+//     let allUsers = await readUsers();
+//     // Step Two: add the new submission
+//     allUsers.push(newSub);
+//     // Step Three: rewrite db file with new content
+//     await writeUsers(allUsers);
+// };
 
 // *** USERS READING AND WRITING END *** //
 

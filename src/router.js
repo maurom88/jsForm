@@ -28,12 +28,7 @@ router.post('/contact/post', validateSubMiddleware, async function (request, res
 
 // Get a list of all submissions
 //  router.get('/contact/list', readSubs);
-router.get('/contact/list', function(req, res, next) {
-  connection.query('select * from formsubs', function (error, results, fields) {
-      if(error) throw error;
-      res.send(results);
-  });
-});
+router.get('/contact/list', db.readSubs);
 
 // Create a user
 router.post('/user/register', async function (request, response, next) {

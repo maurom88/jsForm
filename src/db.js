@@ -15,15 +15,14 @@ let dbUsersPath = path.resolve('src/db/users.json');
 
 // *** SUBMISSIONS READING AND WRITING START *** //
 // Read list of submissions : TODO
-// function readSubs(req, res) {
-//     let query = "SELECT * FROM formsubs ORDER BY SubID ASC"; // query db to get all form submissions
+function readSubs(req, res, next) {
+    const query = `select * from formsubs`;
 
-//     // execute query
-//     connection.query(query, (err, result) => {
-//         if (err) throw err;
-//         console.log(result);
-//     });
-// }
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
 
 // Write submissions
 function addSub(newSub) {
@@ -76,6 +75,6 @@ async function addUser(newSub) {
 
 module.exports = {
     addSub,
-    // readSubs,
+    readSubs,
     addUser
 };

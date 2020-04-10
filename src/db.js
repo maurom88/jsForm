@@ -1,14 +1,15 @@
 'use strict';
 
-let util = require('util');
-let fs = require('fs');
-let path = require('path');
+const util = require('util');
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcrypt');
 
-let readFile = util.promisify(fs.readFile);
-let writeFile = util.promisify(fs.writeFile);
-let deleteFile = util.promisify(fs.unlink);
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+const deleteFile = util.promisify(fs.unlink);
 
-let dbUsersPath = path.resolve('src/db/users.json');
+const dbUsersPath = path.resolve('src/db/users.json');
 
 // *** PROJECTS READING FROM DB *** //
 // Read list of projects : TODO
@@ -62,34 +63,32 @@ function addUser(newUser) {
     const firstName = newUser.firstName
     const lastName = newUser.lastName
     const email = newUser.email
-    const password = newUser.password
+    const password = newUser.password1
 
-    const query = `INSERT INTO users (FirstName, LastName, Email, Password) VALUES ('` +
-    firstName + `', '` +
-    lastName + `', '` +
-    email + `', '` +
-    password + `');`;
+    let emailQuery = `SELECT * FROM users WHERE Email = "${email}";`
 
-    connection.query(query, (err, result) => {
+    connection.query(emailQuery, (err, result) => {
         if (err) throw err;
+        if (result.length > 0) {
+            //                                      //
+            // add message for email already in db  //
+            //                                      //
+        } else {
+            bcrypt.hash(password, 10, function (err, hash) { // hash password and write user to db
+
+                const query = `INSERT INTO users (FirstName, LastName, Email, Password) VALUES ('` +
+                    firstName + `', '` +
+                    lastName + `', '` +
+                    email + `', '` +
+                    hash + `');`;
+
+                connection.query(query, (err, result) => {
+                    if (err) throw err;
+                });
+            });
+        }
     });
 }
-
-// // Write the contents of users.json, replacing the entire file
-// async function writeUsers(dbItems) {
-//     let json = JSON.stringify(dbItems, null, 2);
-//     await writeFile(dbUsersPath, json);
-// }
-
-// // Write users
-// async function addUser(newSub) {
-//     // Step One: read db content
-//     let allUsers = await readUsers();
-//     // Step Two: add the new submission
-//     allUsers.push(newSub);
-//     // Step Three: rewrite db file with new content
-//     await writeUsers(allUsers);
-// };
 
 // *** USERS READING AND WRITING END *** //
 

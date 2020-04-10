@@ -8,26 +8,25 @@ let readFile = util.promisify(fs.readFile);
 let writeFile = util.promisify(fs.writeFile);
 let deleteFile = util.promisify(fs.unlink);
 
-let dbSubPath = path.resolve('src/db/submissions.json');
 let dbUsersPath = path.resolve('src/db/users.json');
-let sessionPath = path.resolve('src/sessions');
+
+// *** PROJECTS READING FROM DB *** //
+// Read list of projects : TODO
 
 // *** SUBMISSIONS READING AND WRITING START *** //
-// Read submissions
-async function readSubs() {
-    let fileContents = await readFile(dbSubPath);
-    let allSubmissions = JSON.parse(fileContents);
-    return allSubmissions;
-};
+// Read list of submissions : TODO
+// function readSubs(req, res) {
+//     let query = "SELECT * FROM formsubs ORDER BY SubID ASC"; // query db to get all form submissions
 
-// Write the contents of submissions.json, replacing the entire file
-async function writeSubs(dbItems) {
-    let json = JSON.stringify(dbItems, null, 2);
-    await writeFile(dbSubPath, json);
-}
+//     // execute query
+//     connection.query(query, (err, result) => {
+//         if (err) throw err;
+//         console.log(result);
+//     });
+// }
 
 // Write submissions
-async function addSub(newSub) {
+function addSub(newSub) {
     const name = newSub.name;
     const email = newSub.email;
     const phone = newSub.phone;
@@ -44,7 +43,7 @@ async function addSub(newSub) {
     connection.query(query, (err, result) => {
         if (err) throw err;
     });
-};
+}
 
 // *** SUBMISSIONS READING AND WRITING END *** //
 
@@ -76,7 +75,7 @@ async function addUser(newSub) {
 // *** USERS READING AND WRITING END *** //
 
 module.exports = {
-    addSub: addSub,
-    readSubs: readSubs,
-    addUser: addUser,
+    addSub,
+    // readSubs,
+    addUser
 };

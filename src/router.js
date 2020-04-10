@@ -27,9 +27,12 @@ router.post('/contact/post', validateSubMiddleware, async function (request, res
 });
 
 // Get a list of all submissions
-router.get('/contact/list', async function (request, response, next) {
-  let submissions = await db.readSubs();
-  response.render('submissions', {"submissions": submissions});
+//  router.get('/contact/list', readSubs);
+router.get('/contact/list', function(req, res, next) {
+  connection.query('select * from formsubs', function (error, results, fields) {
+      if(error) throw error;
+      res.send(results);
+  });
 });
 
 // Create a user
@@ -37,10 +40,5 @@ router.post('/user/register', async function (request, response, next) {
   await db.addUser(request.body);
   response.sendStatus(201);
 });
-
-// Log in a user (create session)
-
-// Log out a user (delete session)
-
 
 module.exports = router;

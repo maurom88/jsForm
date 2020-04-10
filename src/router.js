@@ -29,12 +29,12 @@ router.post('/contact', validateSubMiddleware, function (request, response) {
 router.get('/contact/list', db.readSubs);
 
 // Create a user
-router.post('/users', function (request, response) {
+router.post('/users/signup', function (request, response) {
   db.addUser(request.body);
   response.sendStatus(201);
 });
 
 // Get a list of all users
-router.get('/users/list', db.readUsers);
+router.get('/users', db.readUsers);
 
 module.exports = router;

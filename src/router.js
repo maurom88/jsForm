@@ -20,20 +20,21 @@ function validateSubMiddleware(request, response, next) {
 }
 
 // Submit form
-router.post('/contact/post', validateSubMiddleware, async function (request, response, next) {
-  await db.addSub(request.body);
+router.post('/contact/post', validateSubMiddleware, function (request, response) {
+  db.addSub(request.body);
   response.sendStatus(201);
-  next();
 });
 
 // Get a list of all submissions
-//  router.get('/contact/list', readSubs);
 router.get('/contact/list', db.readSubs);
 
 // Create a user
-router.post('/user/register', async function (request, response, next) {
+router.post('/users/register', async function (request, response, next) {
   await db.addUser(request.body);
   response.sendStatus(201);
 });
+
+// Get a list of all users
+router.get('/users/list', db.readUsers);
 
 module.exports = router;

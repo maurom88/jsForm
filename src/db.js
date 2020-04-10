@@ -14,7 +14,7 @@ let dbUsersPath = path.resolve('src/db/users.json');
 // Read list of projects : TODO
 
 // *** SUBMISSIONS READING AND WRITING START *** //
-// Read list of submissions : TODO
+// Read list of submissions
 function readSubs(req, res, next) {
     const query = `select * from formsubs`;
 
@@ -48,12 +48,21 @@ function addSub(newSub) {
 
 // *** USERS READING AND WRITING START *** //
 
-// Read users
-async function readUsers() {
-    let fileContents = await readFile(dbUsersPath);
-    let allUsers = JSON.parse(fileContents);
-    return allUsers;
-};
+// Read  list of users
+function readUsers(req, res, next) {
+    const query = `select * from users`;
+
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
+
+// async function readUsers() {
+//     let fileContents = await readFile(dbUsersPath);
+//     let allUsers = JSON.parse(fileContents);
+//     return allUsers;
+// };
 
 // Write the contents of users.json, replacing the entire file
 async function writeUsers(dbItems) {
@@ -76,5 +85,6 @@ async function addUser(newSub) {
 module.exports = {
     addSub,
     readSubs,
-    addUser
+    addUser,
+    readUsers
 };

@@ -50,19 +50,13 @@ function addSub(newSub) {
 
 // Read  list of users
 function readUsers(req, res, next) {
-    const query = `select * from users`;
+    const query = `select FirstName, LastName, Email from users`;
 
     connection.query(query, function (error, results, fields) {
         if (error) throw error;
         res.send(results);
     });
 }
-
-// async function readUsers() {
-//     let fileContents = await readFile(dbUsersPath);
-//     let allUsers = JSON.parse(fileContents);
-//     return allUsers;
-// };
 
 // Write the contents of users.json, replacing the entire file
 async function writeUsers(dbItems) {

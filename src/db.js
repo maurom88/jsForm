@@ -103,7 +103,11 @@ function readProjects(req, res) {
 // *** PROJECTS READING FROM DB *** //
 // Read list of jobs
 function readJobs(req, res) {
-    const query = `select * from jobs`;
+    const query = `SELECT 
+                        DATE_FORMAT(StartDate, "%M %Y") AS StartDate, 
+                        DATE_FORMAT(EndDate, "%M %Y") AS EndDate, 
+                        Title, Employer, City, Country
+                    FROM jobs;`;
 
     connection.query(query, function (error, results, fields) {
         if (error) throw error;

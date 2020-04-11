@@ -37,4 +37,7 @@ router.post('/users/signup', function (request, response) {
 // Get a list of all users
 router.get('/users', db.readUsers);
 
+// Get list of projects
+router.get('/portfolio', db.readProjects);
+
 module.exports = router;

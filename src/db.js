@@ -11,9 +11,6 @@ const deleteFile = util.promisify(fs.unlink);
 
 const dbUsersPath = path.resolve('src/db/users.json');
 
-// *** PROJECTS READING FROM DB *** //
-// Read list of projects : TODO
-
 // *** SUBMISSIONS READING AND WRITING START *** //
 // Read list of submissions
 function readSubs(req, res, next) {
@@ -92,9 +89,21 @@ function addUser(newUser) {
 
 // *** USERS READING AND WRITING END *** //
 
+// *** PROJECTS READING FROM DB *** //
+// Read list of projects
+function readProjects(req, res) {
+    const query = `select * from projects`;
+
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
+
 module.exports = {
     addSub,
     readSubs,
     addUser,
-    readUsers
+    readUsers,
+    readProjects
 };

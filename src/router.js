@@ -40,4 +40,7 @@ router.get('/users', db.readUsers);
 // Get list of projects
 router.get('/portfolio', db.readProjects);
 
+// Get list of jobs
+router.get('/resume', db.readJobs);
+
 module.exports = router;

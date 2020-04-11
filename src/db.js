@@ -100,10 +100,22 @@ function readProjects(req, res) {
     });
 }
 
+// *** PROJECTS READING FROM DB *** //
+// Read list of jobs
+function readJobs(req, res) {
+    const query = `select * from jobs`;
+
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
+
 module.exports = {
     addSub,
     readSubs,
     addUser,
     readUsers,
-    readProjects
+    readProjects,
+    readJobs
 };

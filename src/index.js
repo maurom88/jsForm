@@ -1,12 +1,27 @@
 'use strict';
 
-let express = require('express');
-let router = require('./router');
-let session = require('express-session');
-let path = require('path');
-let cors = require('cors');
+const express = require('express');
+const router = require('./router');
+const session = require('express-session');
+const path = require('path');
+const cors = require('cors');
+const mysql = require('mysql')
 
-let app = express();
+const app = express();
+
+// Create connection to database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'nodeclient',
+  password: '123456',
+  database: 'my_portfolio'
+});
+
+connection.connect(function (err) {
+  if (err) throw err;
+  console.log('Connected to database');
+});
+global.connection = connection;
 
 // Initialize pug template engine
 app.set('view engine', 'pug');

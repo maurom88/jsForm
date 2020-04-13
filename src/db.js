@@ -1,72 +1,125 @@
 'use strict';
 
-let util = require('util');
-let fs = require('fs');
-let path = require('path');
+const util = require('util');
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcrypt');
 
-let readFile = util.promisify(fs.readFile);
-let writeFile = util.promisify(fs.writeFile);
-let deleteFile = util.promisify(fs.unlink);
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+const deleteFile = util.promisify(fs.unlink);
 
-let dbSubPath = path.resolve('src/db/submissions.json');
-let dbUsersPath = path.resolve('src/db/users.json');
-let sessionPath = path.resolve('src/sessions');
+const dbUsersPath = path.resolve('src/db/users.json');
 
 // *** SUBMISSIONS READING AND WRITING START *** //
-// Read submissions
-async function readSubs() {
-    let fileContents = await readFile(dbSubPath);
-    let allSubmissions = JSON.parse(fileContents);
-    return allSubmissions;
-};
+// Read list of submissions
+function readSubs(req, res, next) {
+    const query = `select * from formsubs`;
 
-// Write the contents of submissions.json, replacing the entire file
-async function writeSubs(dbItems) {
-    let json = JSON.stringify(dbItems, null, 2);
-    await writeFile(dbSubPath, json);
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
 }
 
 // Write submissions
-async function addSub(newSub) {
-    // Step One: read db content
-    let allSubs = await readSubs();
-    // Step Two: add the new submission
-    allSubs.push(newSub);
-    // Step Three: rewrite db file with new content
-    await writeSubs(allSubs);
-};
+function addSub(newSub) {
+    const name = newSub.name;
+    const email = newSub.email;
+    const phone = newSub.phone;
+    const subject = newSub.subject;
+    const message = newSub.message;
+
+    const query = `INSERT INTO formsubs (Name, Email, Phone, Subject, Message) VALUES ('` +
+        name + `', '` +
+        email + `', '` +
+        phone + `', '` +
+        subject + `', '` +
+        message + `');`;
+
+    connection.query(query, (err, result) => {
+        if (err) throw err;
+    });
+}
 
 // *** SUBMISSIONS READING AND WRITING END *** //
 
 // *** USERS READING AND WRITING START *** //
 
-// Read users
-async function readUsers() {
-    let fileContents = await readFile(dbUsersPath);
-    let allUsers = JSON.parse(fileContents);
-    return allUsers;
-};
+// Read  list of users
+function readUsers(req, res, next) {
+    const query = `select FirstName, LastName, Email from users`;
 
-// Write the contents of users.json, replacing the entire file
-async function writeUsers(dbItems) {
-    let json = JSON.stringify(dbItems, null, 2);
-    await writeFile(dbUsersPath, json);
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
 }
 
-// Write users
-async function addUser(newSub) {
-    // Step One: read db content
-    let allUsers = await readUsers();
-    // Step Two: add the new submission
-    allUsers.push(newSub);
-    // Step Three: rewrite db file with new content
-    await writeUsers(allUsers);
-};
+function addUser(newUser) {
+    const firstName = newUser.firstName
+    const lastName = newUser.lastName
+    const email = newUser.email
+    const password = newUser.password1
+
+    let emailQuery = `SELECT * FROM users WHERE Email = "${email}";`
+
+    connection.query(emailQuery, (err, result) => {
+        if (err) throw err;
+        if (result.length > 0) {
+            //                                      //
+            // add message for email already in db  //
+            //                                      //
+        } else {
+            bcrypt.hash(password, 10, function (err, hash) { // hash password and write user to db
+
+                const query = `INSERT INTO users (FirstName, LastName, Email, Password) VALUES ('` +
+                    firstName + `', '` +
+                    lastName + `', '` +
+                    email + `', '` +
+                    hash + `');`;
+
+                connection.query(query, (err, result) => {
+                    if (err) throw err;
+                });
+            });
+        }
+    });
+}
 
 // *** USERS READING AND WRITING END *** //
 
+// *** PROJECTS READING FROM DB *** //
+// Read list of projects
+function readProjects(req, res) {
+    const query = `select * from projects`;
+
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
+
+// *** PROJECTS READING FROM DB *** //
+// Read list of jobs
+function readJobs(req, res) {
+    const query = `SELECT 
+                        DATE_FORMAT(StartDate, "%M %Y") AS StartDate, 
+                        DATE_FORMAT(EndDate, "%M %Y") AS EndDate, 
+                        Title, Employer, City, Country
+                    FROM jobs;`;
+
+    connection.query(query, function (error, results, fields) {
+        if (error) throw error;
+        res.send(results);
+    });
+}
+
 module.exports = {
-    addSub: addSub,
-    readSubs: readSubs,
-    addUser: addUser,
+    addSub,
+    readSubs,
+    addUser,
+    readUsers,
+    readProjects,
+    readJobs
 };

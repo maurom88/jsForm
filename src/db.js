@@ -5,11 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
-const deleteFile = util.promisify(fs.unlink);
-
-const dbUsersPath = path.resolve('src/db/users.json');
+// const readFile = util.promisify(fs.readFile);
+// const writeFile = util.promisify(fs.writeFile);
+// const deleteFile = util.promisify(fs.unlink);
 
 // *** SUBMISSIONS READING AND WRITING START *** //
 // Read list of submissions

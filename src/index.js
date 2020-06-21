@@ -2,20 +2,22 @@
 
 const express = require('express');
 const router = require('./router');
-const session = require('express-session');
-const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql')
 
+require('dotenv').config()
+
 const app = express();
 
-// Create connection to database
+// db connection w/ env
 const connection = mysql.createConnection({
-  host: 'db',
-  user: 'mauro',
-  password: 'a7T*36B7MSKFwR',
-  database: 'myPortfolio'
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME
 });
+
+
 
 connection.connect(function (err) {
   if (err) throw err;
@@ -35,5 +37,4 @@ app.use(function (error, request, response, next) {
 });
 
 // Server configuration
-let port = 9000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+app.listen(process.env.PORT || 9000, () => console.log(`Server is running on port ${process.env.PORT || 9000}`));

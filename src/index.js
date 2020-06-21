@@ -11,10 +11,10 @@ const app = express();
 
 // Create connection to database
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'nodeclient',
-  password: '123456',
-  database: 'my_portfolio'
+  host: 'db',
+  user: 'mauro',
+  password: 'a7T*36B7MSKFwR',
+  database: 'myPortfolio'
 });
 
 connection.connect(function (err) {

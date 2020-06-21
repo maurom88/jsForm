@@ -1,0 +1,10 @@
+runtime: custom
+env: flex
+beta_settings:
+  cloud_sql_instances: mauro-meden-portfolio:northamerica-northeast1:mauro-meden-portfolio=tcp:3306
+env_variables:
+  DATABASE_HOST: "cloudsql"
+  DATABASE_NAME: "myPortfolio"
+  DATABASE_USER: "mauro"
+  DATABASE_PASSWORD: "a7T*36B7MSKFwR"
+  DATABASE_ROOT_PASSWORD: "59f11jNCzHmlEmLx"

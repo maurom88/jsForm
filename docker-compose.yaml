@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  api:
+    container_name: portfolioApi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+  
+  db:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: 59f11jNCzHmlEmLx
+      MYSQL_DATABASE: myPortfolio
+      MYSQL_USER: mauro
+      MYSQL_PASSWORD: a7T*36B7MSKFwR
+    ports:
+      - "3307:3306"

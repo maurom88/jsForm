@@ -1,0 +1,10 @@
+runtime: custom
+env: flex
+beta_settings:
+  cloud_sql_instances: <MYSQL INSTANCE CONNECTION NAME>=tcp:3306
+env_variables:
+  DATABASE_HOST: "cloudsql"
+  DATABASE_NAME: "<DB NAME>"
+  DATABASE_USER: "<DB USERNAME>"
+  DATABASE_PASSWORD: "<DB USER PASSWORD>"
+  DATABASE_ROOT_PASSWORD: "<MYSQL ROOT PASSWORD>"

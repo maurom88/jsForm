@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# deployment
+.yml
+.yaml
+Dockerfile
+
 # env files
 .env
 .env.local

@@ -26,9 +26,14 @@ connection.connect(function (err) {
 global.connection = connection;
 
 // Apply middleware
-app.use(cors());
-app.use(express.json()); // Allows to read and write json files easily
-app.use(router); // Apply router as middleware
+const corsOptions = {
+  origin: function (origin, callback) {
+    callback(null, true)
+  }
+}
+app.use(cors(corsOptions))
+app.use(express.json()) // Allows to read and write json files easily
+app.use(router) // Apply router as middleware
 
 // Error handler
 app.use(function (error, request, response, next) {
